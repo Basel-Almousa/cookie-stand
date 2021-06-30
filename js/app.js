@@ -89,35 +89,70 @@ Salmon.prototype.render = function () {
 for (let i = 0; i < salmonarray.length; i++) {
   salmonarray[i].calcCustEachHour();
   salmonarray[i].calcCookiesHour();
-  salmonarray[i].render();
+  // salmonarray[i].render();
 }
-function makeFooter(){
-let footerRaw= document.createElement("tr");
-tableElement.appendChild(footerRaw);
+function makeFooter() {
+  let footerRaw = document.createElement("tr");
+  tableElement.appendChild(footerRaw);
 
-let footeRth= document.createElement('th');
-footerRaw.appendChild(footeRth);
-footeRth.textContent = 'Totals';
+  let footeRth = document.createElement('th');
+  footerRaw.appendChild(footeRth);
+  footeRth.textContent = 'Totals';
 
-let megaTotal= 0;
-for (let i = 0; i < hours.length; i++) {
-  let totaleachHour=0 ;
-  for (let j = 0; j < salmonarray.length; j++) {
-    totaleachHour += salmonarray[j].cookieseachhour[i];
-    megaTotal += salmonarray[j].cookieseachhour[i];
+  let megaTotal = 0;
+  for (let i = 0; i < hours.length; i++) {
+    let totaleachHour = 0;
+    for (let j = 0; j < salmonarray.length; j++) {
+      totaleachHour += salmonarray[j].cookieseachhour[i];
+      megaTotal += salmonarray[j].cookieseachhour[i];
+    }
+    console.log(totaleachHour);
+    let footerdata = document.createElement('td');
+    footerRaw.appendChild(footerdata);
+    footerdata.textContent = totaleachHour;
+
   }
-  console.log(totaleachHour);
-  let footerdata= document.createElement('td');
-  footerRaw.appendChild(footerdata);
-  footerdata.textContent= totaleachHour;
-  
-}
-let finaltd= document.createElement('td');
-footerRaw.appendChild(finaltd);
-finaltd.textContent= megaTotal;
+  let finaltd = document.createElement('td');
+  footerRaw.appendChild(finaltd);
+  finaltd.textContent = megaTotal;
 
 }
 makeFooter();
+
+const SalmonForm = document.getElementById('SalmonForm');
+SalmonForm.addEventListener('submit', handleSubmit);
+
+function handleSubmit(event) {
+  event.preventDefault();
+  console.log(event);
+  const newName = event.target.namefield.value;
+  console.log(newName);
+
+  const NewMinimum = event.target.mincust.value;
+  console.log(NewMinimum);
+
+  const NewMaximum = event.target.maxcust.value;
+  console.log(NewMaximum);
+
+  const NewAvg = event.target.avgCookies.value;
+  console.log(NewAvg);
+
+  const newsalmon = new Salmon(newName, NewMinimum, NewMaximum, NewAvg)
+  console.log(newsalmon, "salmon");
+
+
+
+  newsalmon.calcCustEachHour();
+  newsalmon.calcCookiesHour();
+
+  newsalmon.render();
+
+  
+  
+}
+for (let i = 0; i < salmonarray.length; i++) {
+  salmonarray[i].render();
+}
 
 // const hours = ['6:00 am', '7:00 am', '8:00 am', '9:00 am', '10:00 am', '11:00 am', '12:00 pm', '1:00 pm', '2:00 pm', '3:00 pm', '4:00 pm', '5:00 pm', '6:00 pm', '7:00 pm'];
 
