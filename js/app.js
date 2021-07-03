@@ -26,7 +26,7 @@ Salmon.prototype.calcCustEachHour = function () {
 }
 Salmon.prototype.calcCookiesHour = function () {
   for (let j = 0; j < hours.length; j++) {
-    this.cookieseachhour.push(Math.floor(this.avgCookies * this.customereachhour[j]));
+    this.cookieseachhour.push(Math.ceil(this.avgCookies * this.customereachhour[j]));
     // this.total += this.cookieseachhour[i];
     this.totalCookiesPerDay += this.cookieseachhour[j];
   }
@@ -49,6 +49,7 @@ parent.appendChild(tableElement);
 function makeHeader() {
   let headerRow = document.createElement('tr');
   tableElement.appendChild(headerRow);
+  
   let firstTh = document.createElement('th');
   headerRow.appendChild(firstTh);
   firstTh.textContent = 'Name';
@@ -66,7 +67,6 @@ function makeHeader() {
 
 }
 
-makeHeader();
 Salmon.prototype.render = function () {
   let dataRow = document.createElement('tr');
   tableElement.appendChild(dataRow);
@@ -117,7 +117,6 @@ function makeFooter() {
   finaltd.textContent = megaTotal;
 
 }
-makeFooter();
 
 const SalmonForm = document.getElementById('SalmonForm');
 SalmonForm.addEventListener('submit', handleSubmit);
@@ -128,13 +127,16 @@ function handleSubmit(event) {
   const newName = event.target.namefield.value;
   console.log(newName);
 
-  const NewMinimum = event.target.mincust.value;
+  let NewMinimum = event.target.mincust.value;
+  NewMinimum= parseInt(NewMinimum);
   console.log(NewMinimum);
 
-  const NewMaximum = event.target.maxcust.value;
+  let NewMaximum = event.target.maxcust.value;
+  NewMaximum= parseInt(NewMaximum);
   console.log(NewMaximum);
 
-  const NewAvg = event.target.avgCookies.value;
+  let NewAvg = event.target.avgCookies.value;
+  NewAvg= parseFloat(NewAvg);
   console.log(NewAvg);
 
   const newsalmon = new Salmon(newName, NewMinimum, NewMaximum, NewAvg)
@@ -144,15 +146,21 @@ function handleSubmit(event) {
 
   newsalmon.calcCustEachHour();
   newsalmon.calcCookiesHour();
-
+  let deleted= tableElement.rows.length - 1
+  tableElement.deleteRow(deleted);
+  
   newsalmon.render();
 
-  
+  makeFooter();
+
   
 }
+makeHeader();
+
 for (let i = 0; i < salmonarray.length; i++) {
   salmonarray[i].render();
 }
+makeFooter();
 
 // const hours = ['6:00 am', '7:00 am', '8:00 am', '9:00 am', '10:00 am', '11:00 am', '12:00 pm', '1:00 pm', '2:00 pm', '3:00 pm', '4:00 pm', '5:00 pm', '6:00 pm', '7:00 pm'];
 
