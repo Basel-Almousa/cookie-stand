@@ -1,7 +1,7 @@
-table th{
+/* table th{
   table-layout: fixed;
   border: 3px solid rgb(238, 255, 0);
-}
+} */
 table td{
   table-layout: fixed;
   border: 3px solid rgb(251, 255, 0);
@@ -12,17 +12,20 @@ th,
 td{
   background-color:rgb(154, 155, 154);
   table-layout: fixed;
-border: solid black 1px;
-padding: 12px 20px;
-margin: 8px 0;
+  border: solid black 1px;
+  padding: 12px 20px;
+  margin-left: 800px ;
 }
 form{
 width: 100%;
 padding: 12px 20px;
 margin: 8px 0;
 background-color:rgb(154, 155, 154);
-color: rgb(238, 255, 0);
 font-weight: bolder;
+}
+header img{
+  position: relative;
+   
 }
 body{
   box-sizing: content-box;
@@ -32,7 +35,6 @@ body{
   color: rgb(154, 155, 154) 255, 241);
 }
 header{
-  background-color:  #ffee00;
   background-image: url("../images/5.png");width: auto; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -64,10 +66,7 @@ header audio{
   display: none;
 }
 
-header img{
-  position: relative;
-   
-}
+
 
 header #card{
   position: absolute;
@@ -87,7 +86,7 @@ header div{
 }
 main h2{
   font-family: 'Special Elite', cursive;
-color: gold;
+color:black;
 }
 footer{
   /* position: fixed; */
